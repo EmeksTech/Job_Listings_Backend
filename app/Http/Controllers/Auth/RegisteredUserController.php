@@ -41,6 +41,8 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        $token = $user->createToken('JobListingApp')->plainTextToken;
+
         event(new Registered($user));
 
         Auth::login($user);
